@@ -1,0 +1,54 @@
+Using PyTorch Ver 1.7.1
+Fix Seed: 42
+Global seed set to 42
+Some weights of the model checkpoint at ../model_checkpoint/HanBart_202110220849/saved_checkpoint_350 were not used when initializing BartForSequenceClassification: ['final_logits_bias', 'lm_head.weight']
+- This IS expected if you are initializing BartForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BartForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BartForSequenceClassification were not initialized from the model checkpoint at ../model_checkpoint/HanBart_202110220849/saved_checkpoint_350 and are newly initialized: ['classification_head.dense.weight', 'classification_head.dense.bias', 'classification_head.out_proj.weight', 'classification_head.out_proj.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+:: Start Training ::
+[W Context.cpp:69] Warning: torch.set_deterministic is in beta, and its design and  functionality may change in the future. (function operator())
+/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:850: UserWarning: You requested multiple GPUs but did not specify a backend, e.g. `Trainer(strategy="dp"|"ddp"|"ddp2")`. Setting `strategy="ddp_spawn"` for you.
+  "You requested multiple GPUs but did not specify a backend, e.g."
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/optimizers.py:227: RuntimeWarning: Found unsupported keys in the optimizer configuration: {'scheduler'}
+  rank_zero_warn(f"Found unsupported keys in the optimizer configuration: {set(extra_keys)}", RuntimeWarning)
+Traceback (most recent call last):
+  File "run_finetuning.py", line 189, in <module>
+    main()
+  File "run_finetuning.py", line 186, in main
+    trainer.fit(model, datamodule)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 736, in fit
+    self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 682, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 770, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1193, in _run
+    self._dispatch()
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/trainer/trainer.py", line 1272, in _dispatch
+    self.training_type_plugin.start_training(self)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/plugins/training_type/ddp_spawn.py", line 173, in start_training
+    self.spawn(self.new_process, trainer, self.mp_queue, return_result=False)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/pytorch_lightning/plugins/training_type/ddp_spawn.py", line 201, in spawn
+    mp.spawn(self._wrapped_function, args=(function, args, kwargs, return_queue), nprocs=self.num_processes)
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/torch/multiprocessing/spawn.py", line 199, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/opt/conda/envs/python37/lib/python3.7/site-packages/torch/multiprocessing/spawn.py", line 148, in start_processes
+    process.start()
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/process.py", line 112, in start
+    self._popen = self._Popen(self)
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/context.py", line 284, in _Popen
+    return Popen(process_obj)
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/popen_fork.py", line 20, in __init__
+    self._launch(process_obj)
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/popen_spawn_posix.py", line 47, in _launch
+    reduction.dump(process_obj, fp)
+  File "/opt/conda/envs/python37/lib/python3.7/multiprocessing/reduction.py", line 60, in dump
+    ForkingPickler(file, protocol).dump(obj)
+AttributeError: Can't pickle local object 'CDLL.__init__.<locals>._FuncPtr'

@@ -1,0 +1,26 @@
+tbai_required:
+  model_id: "HanBart"
+setup:
+  model_class: T5ForConditionalGeneration
+  tokenizer_class: T5Tokenizer
+  tokenizer: KETI-AIR/ke-t5-base
+  model: KETI-AIR/ke-t5-base
+  checkpoint: 
+  data_dir: ../data/
+  train_data_path: ../data/train.json
+  val_data_path: ../data/valid.json  
+  device: CPU
+  xla_parallel: True
+  fp16: False
+  random_seed: 42
+  epochs: 5
+  test_mode: True  # Test Mode enables `fast_dev_run`
+  tpu_cores: 0
+
+hyperparameters:
+  optimizer_class: AdamW  
+  batch_size: 16
+  gradient_accumulation_steps: 4
+  log_every: 10
+  lr: 5e-6
+  lr_scheduler: exp
